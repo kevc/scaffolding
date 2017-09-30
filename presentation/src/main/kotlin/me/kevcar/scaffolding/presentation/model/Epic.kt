@@ -1,6 +1,7 @@
 package me.kevcar.scaffolding.presentation.model
 
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import me.kevcar.scaffolding.domain.interactor.image.FetchImages
 import redux.api.Store
 import redux.observable.Epic
@@ -12,7 +13,7 @@ class Epic @Inject constructor(private val fetchImages: FetchImages) : Epic<AppM
                 .flatMap { action ->
                     fetchImages.execute(FetchImages.Request(action.query, 35, 0))
                             .map { AppModel.Action.SetImages(it.images) }
-                            .toObservable()
+                            .subscribeOn(Schedulers.io())
                 }
 
     }

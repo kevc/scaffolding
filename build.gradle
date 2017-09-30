@@ -18,6 +18,7 @@ buildscript {
 
         // Declarations
         appCompatV7 = "com.android.support:appcompat-v7:$appCompatV7Version"
+        recyclerView = "com.android.support:recyclerview-v7:$appCompatV7Version"
 
         ////////////////////////////////////////////////////////////////
         // Libs

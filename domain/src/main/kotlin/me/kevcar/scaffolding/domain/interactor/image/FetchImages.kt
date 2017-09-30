@@ -1,6 +1,6 @@
 package me.kevcar.scaffolding.domain.interactor.image
 
-import io.reactivex.Single
+import io.reactivex.Observable
 import me.kevcar.scaffolding.core.entity.Image
 import me.kevcar.scaffolding.domain.datasource.RemoteImageDataSource
 import javax.inject.Inject
@@ -8,9 +8,10 @@ import javax.inject.Inject
 
 class FetchImages @Inject constructor(private val remote: RemoteImageDataSource) {
 
-    fun execute(request: Request): Single<Response> {
+    fun execute(request: Request): Observable<Response> {
         return remote.fetchImages(request.query, request.pageSize, request.offset)
-                .map { Response(0, it) } // Todo set offset property
+                .doOnNext { System.out.println("${it.size} |||| ${it}") }
+                .map { Response(0, it) }
     }
 
     class Request(val query: String, val pageSize: Int, val offset: Int)

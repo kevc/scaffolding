@@ -63,16 +63,25 @@ dependencies {
 
     // Libs
     compile appCompatV7
+    compile recyclerView
     compile dagger
     compile gson
     compile kotlinStdLib
     compile retrofit
     compile retrofitGsonConverter
     compile rxJava
+    compile reduxObservable
+
+    // Ran out of time, so this is a bit messy.
+    compile 'com.airbnb.android:epoxy:2.5.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.pardom.redux-rxjava:redux-rxjava2:1.2.3'
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 
     ////////////////////////////////////////////////////////////////
     // Test Dependencies
 
     testCompile jUnit
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

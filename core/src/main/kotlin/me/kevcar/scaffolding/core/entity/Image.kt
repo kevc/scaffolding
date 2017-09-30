@@ -1,4 +1,6 @@
 package me.kevcar.scaffolding.core.entity
 
-class Image {
-}
+data class Image(
+        val thumbnailUrl: String,
+        val contentUrl: String
+)
