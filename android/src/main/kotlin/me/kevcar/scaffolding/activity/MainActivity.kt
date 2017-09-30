@@ -1,12 +1,16 @@
 package me.kevcar.scaffolding.activity
 
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
@@ -24,8 +28,20 @@ class MainActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.recycler_view)
     }
 
+    private val fullImageView: ImageView by lazy {
+        findViewById<ImageView>(R.id.full_size_image)
+    }
+
+    private val imageGallery: View by lazy {
+        findViewById<View>(R.id.image_bg)
+    }
+
     private val appModel: AppModel by lazy {
         Application.getComponent(this).appModel()
+    }
+
+    private val picasso: Picasso by lazy {
+        Application.getComponent(this).picasso()
     }
 
     private val layoutManager = GridLayoutManager(this, 4)
@@ -34,6 +50,19 @@ class MainActivity : AppCompatActivity() {
         override fun onImageClicked(image: Image) {
             // TODO show full screen image here.
             Log.d("Tag", "Showing image here.")
+            picasso.load(image.contentUrl)
+                    .into(fullImageView)
+
+            imageGallery.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onBackPressed() {
+        if (imageGallery.visibility == View.VISIBLE) {
+            imageGallery.visibility = View.GONE
+        }
+        else {
+            super.onBackPressed()
         }
     }
 

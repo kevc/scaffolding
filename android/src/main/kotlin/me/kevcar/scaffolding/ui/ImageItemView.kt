@@ -1,6 +1,5 @@
 package me.kevcar.scaffolding.ui
 
-import android.app.Application
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -34,6 +33,7 @@ class ImageItemView @JvmOverloads constructor(
                     .picasso()
                     .load(image.thumbnailUrl)
                     .fit()
+                    .centerCrop()
                     .placeholder(ColorDrawable(Color.parseColor("#000000")))
                     .into(view)
         }
