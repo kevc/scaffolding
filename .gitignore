@@ -24,7 +24,6 @@ pom.xml.*
 
 # Ant
 ant.properties
-local.properties
 proguard.cfg
 proguard-project.txt
 
