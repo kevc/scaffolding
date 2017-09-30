@@ -1,13 +1,10 @@
 package me.kevcar.scaffolding.ui
 
-import android.support.v7.widget.RecyclerView
-import android.widget.ImageView
+import android.view.View
 import com.airbnb.epoxy.EpoxyController
-import com.airbnb.epoxy.EpoxyModel
-import me.kevcar.scaffolding.R
 import me.kevcar.scaffolding.core.entity.Image
 
-class ImageController : EpoxyController() {
+class ImageController(private val clickListener: ImageItemView.ImageClickListener) : EpoxyController() {
 
     private var images: List<Image> = emptyList()
 
@@ -17,9 +14,12 @@ class ImageController : EpoxyController() {
     }
 
     override fun buildModels() {
-        this.add(
-                images.map { image -> ImageItemView.Model(image).id(java.util.Random().nextInt()) }
-        )
+        images.forEachIndexed { index, image ->
+            ImageItemView
+                    .Model(image, clickListener)
+                    .id(index)
+                    .let { add(it) }
+        }
     }
 
 }

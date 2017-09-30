@@ -21,10 +21,15 @@ class ImageItemView @JvmOverloads constructor(
         super.onMeasure(widthMeasureSpec, newHeightSpec)
     }
 
-    class Model(private val image: Image) : EpoxyModel<ImageItemView>() {
+    class Model(private val image: Image, private val clickListener: ImageClickListener) : EpoxyModel<ImageItemView>() {
         override fun getDefaultLayout() = R.layout.item_image
 
         override fun bind(view: ImageItemView) {
+
+            view.setOnClickListener {
+                clickListener.onImageClicked(image)
+            }
+
             me.kevcar.scaffolding.app.Application.getComponent(view.context)
                     .picasso()
                     .load(image.thumbnailUrl)
@@ -32,6 +37,10 @@ class ImageItemView @JvmOverloads constructor(
                     .placeholder(ColorDrawable(Color.parseColor("#000000")))
                     .into(view)
         }
+    }
+
+    interface ImageClickListener {
+        fun onImageClicked(image: Image)
     }
 
 }
