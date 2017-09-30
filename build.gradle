@@ -24,12 +24,16 @@ buildscript {
 
         // Versions
         daggerVersion = '2.11'
+        gsonVersion = '2.8.2'
         retrofitVersion = '2.3.0'
         rxJavaVersion = '2.1.3'
 
         // Declarations
         dagger = "com.google.dagger:dagger:$daggerVersion"
+        daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+        gson = "com.google.code.gson:gson:$gsonVersion"
         retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+        retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
         rxJava = "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
 
         ////////////////////////////////////////////////////////////////

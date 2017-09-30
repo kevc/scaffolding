@@ -9,6 +9,9 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
@@ -45,10 +48,20 @@ dependencies {
     ////////////////////////////////////////////////////////////////
     // Dependencies
 
+    // Modules
+    compile project(path: ':core')
+
+    // Annotation Processors
+    kapt daggerCompiler
+
+    // Libs
     compile appCompatV7
     compile dagger
+    compile gson
     compile kotlinStdLib
     compile retrofit
+    compile retrofitGsonConverter
+    compile rxJava
 
     ////////////////////////////////////////////////////////////////
     // Test Dependencies
