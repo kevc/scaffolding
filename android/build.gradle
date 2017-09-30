@@ -27,6 +27,10 @@ android {
         buildConfigField 'String', 'API_KEY', "\"5db7a77b19d943f2a4cce83ce6b59502\""
     }
 
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -50,6 +54,7 @@ dependencies {
 
     // Modules
     compile project(path: ':core')
+    compile project(path: ':domain')
 
     // Annotation Processors
     kapt daggerCompiler
@@ -68,5 +73,4 @@ dependencies {
 
     testCompile jUnit
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile project(path: ':domain')
 }
