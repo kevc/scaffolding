@@ -8,6 +8,7 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
@@ -55,6 +56,7 @@ dependencies {
     // Modules
     compile project(path: ':core')
     compile project(path: ':domain')
+    compile project(path: ':presentation')
 
     // Annotation Processors
     kapt daggerCompiler

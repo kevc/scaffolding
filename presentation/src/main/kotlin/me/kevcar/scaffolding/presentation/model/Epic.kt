@@ -8,6 +8,12 @@ import javax.inject.Inject
 
 class Epic @Inject constructor(private val fetchImages: FetchImages) : Epic<AppModel.State> {
     override fun map(actions: Observable<out Any>, store: Store<AppModel.State>): Observable<out Any> {
-        return Observable.just(Unit)
+        return actions.ofType(AppModel.Action.ExecuteQuery::class.java)
+                .flatMap { action ->
+                    fetchImages.execute(FetchImages.Request(action.query, 35, 0))
+                            .map { AppModel.Action.SetImages(it.images) }
+                            .toObservable()
+                }
+
     }
 }

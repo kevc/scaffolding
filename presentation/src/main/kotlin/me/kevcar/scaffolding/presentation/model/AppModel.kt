@@ -1,22 +1,24 @@
 package me.kevcar.scaffolding.presentation.model
 
+import me.kevcar.scaffolding.core.entity.Image
 import redux.applyMiddleware
 import redux.observable.createEpicMiddleware
 import javax.inject.Inject
 
 class AppModel @Inject constructor(epic: Epic) : redux.api.Store<AppModel.State> {
 
-    data class State(val foo: String)
+    data class State(val images: List<Image> = emptyList())
 
     sealed class Action {
-        class ExecuteQuery(query: String)
+        class ExecuteQuery(val query: String)
+        class SetImages(val images: List<Image>)
     }
 
     // Redux Api Implementation
 
     private val store = redux.createStore(
             Reducer,
-            State(""),
+            State(),
             applyMiddleware(createEpicMiddleware(epic))
     )
 
