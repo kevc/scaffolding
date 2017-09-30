@@ -6,10 +6,12 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import me.kevcar.scaffolding.BuildConfig
+import me.kevcar.scaffolding.api.datasource.RetrofitImageDataSource
 import me.kevcar.scaffolding.api.interceptor.AuthKeyInterceptor
 import me.kevcar.scaffolding.api.service.ImageService
 import me.kevcar.scaffolding.app.Application
 import me.kevcar.scaffolding.core.di.AppScope
+import me.kevcar.scaffolding.domain.datasource.RemoteImageDataSource
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -77,6 +79,12 @@ class AppModule(private val application: Application) {
     @AppScope
     fun provideImageService(retrofit: Retrofit): ImageService {
         return retrofit.create(ImageService::class.java)
+    }
+
+    @Provides
+    @AppScope
+    fun provideRemoteImageDataSource(service: ImageService): RemoteImageDataSource {
+        return RetrofitImageDataSource(service)
     }
 
 }

@@ -3,6 +3,12 @@ apply plugin: 'kotlin'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Modules
+    compile project(path: ':core')
+
+    // Libs
+    compile rxJava
 }
 
 sourceCompatibility = "1.7"
