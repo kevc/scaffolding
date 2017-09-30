@@ -3,6 +3,10 @@ apply plugin: 'kotlin'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile reduxKotlin
+    compile reduxObservable
+    compile project(path: ':domain')
 }
 
 sourceCompatibility = "1.7"
