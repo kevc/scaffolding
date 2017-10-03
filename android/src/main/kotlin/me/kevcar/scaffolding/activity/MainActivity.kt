@@ -5,6 +5,8 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -17,6 +19,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Target
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
@@ -39,6 +42,10 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
 
     private val fullImageView: ImageView by lazy {
         findViewById<ImageView>(R.id.full_size_image)
+    }
+
+    private val loadingView: View by lazy {
+        findViewById<View>(R.id.loading_view)
     }
 
     private val imageGallery: View by lazy {
@@ -142,10 +149,31 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
     }
 
     override fun onImageClicked(image: Image) {
+        loadingView.visibility = View.VISIBLE
+
         picasso.load(image.contentUrl)
-                .into(fullImageView)
+                .into(galleryTarget)
 
         imageGallery.visibility = View.VISIBLE
+    }
+
+    private val galleryTarget = object : Target {
+        override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+            fullImageView.setImageDrawable(null)
+            loadingView.visibility = View.VISIBLE
+        }
+
+        override fun onBitmapFailed(errorDrawable: Drawable?) {
+            // no op
+        }
+
+        override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+            loadingView.visibility = View.GONE
+            bitmap?.let {
+                fullImageView.setImageBitmap(it)
+            }
+        }
+
     }
 
     override fun onBackPressed() {
