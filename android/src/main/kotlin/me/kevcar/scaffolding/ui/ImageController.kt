@@ -1,10 +1,10 @@
 package me.kevcar.scaffolding.ui
 
-import android.view.View
 import com.airbnb.epoxy.EpoxyController
 import me.kevcar.scaffolding.core.entity.Image
 
-class ImageController(private val clickListener: ImageItemView.ImageClickListener) : EpoxyController() {
+class ImageController(
+        private val clickListener: ImageItemView.ImageClickListener) : EpoxyController() {
 
     private var images: List<Image> = emptyList()
 

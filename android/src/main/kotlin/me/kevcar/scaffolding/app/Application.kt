@@ -15,10 +15,12 @@ class Application : Application() {
 
     companion object {
 
+        fun get(context: Context): me.kevcar.scaffolding.app.Application {
+            return (context.applicationContext as me.kevcar.scaffolding.app.Application)
+        }
 
         fun getComponent(context: Context): AppComponent {
-            return (context.applicationContext as me.kevcar.scaffolding.app.Application)
-                    .appComponent
+            return get(context).appComponent
         }
     }
 }

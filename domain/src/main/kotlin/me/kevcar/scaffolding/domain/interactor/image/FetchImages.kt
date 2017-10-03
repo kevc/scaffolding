@@ -10,7 +10,6 @@ class FetchImages @Inject constructor(private val remote: RemoteImageDataSource)
 
     fun execute(request: Request): Observable<Response> {
         return remote.fetchImages(request.query, request.pageSize, request.offset)
-                .doOnNext { System.out.println("${it.size} |||| ${it}") }
                 .map { Response(0, it) }
     }
 

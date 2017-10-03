@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Revl Challenge</string>
+    <string name="clipboard_success">Added to clipboard.</string>
+    <string name="clipboard_permission_prompt">Please long click item again.</string>
+
 </resources>
