@@ -3,7 +3,7 @@ package me.kevcar.scaffolding.presentation.model
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import me.kevcar.scaffolding.domain.interactor.image.FetchImages
-import me.kevcar.scaffolding.presentation.entities.ImagePage
+import me.kevcar.scaffolding.core.entity.ImagePage
 import redux.api.Store
 import redux.observable.Epic
 import javax.inject.Inject
@@ -21,8 +21,7 @@ class Epic @Inject constructor(private val fetchImages: FetchImages) : Epic<AppM
         return actions.ofType(AppModel.Action.ExecuteQuery::class.java)
                 .flatMap { action ->
                     fetchImages.execute(FetchImages.Request(action.query))
-                            .map { ImagePage(action.query, it.images, it.nextPageOffset) }
-                            .map { AppModel.Action.AddPage(it) }
+                            .map { AppModel.Action.AddPage(it.imagePage) }
                             .subscribeOn(Schedulers.io())
                 }
     }
@@ -37,8 +36,7 @@ class Epic @Inject constructor(private val fetchImages: FetchImages) : Epic<AppM
                     val pageOffset = lastPage.nextPageOffset
 
                     fetchImages.execute(FetchImages.Request(searchTerm, pageOffset))
-                            .map { ImagePage(searchTerm, it.images, it.nextPageOffset) }
-                            .map { AppModel.Action.AddPage(it) }
+                            .map { AppModel.Action.AddPage(it.imagePage) }
                             .subscribeOn(Schedulers.io())
                 }
     }

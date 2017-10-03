@@ -1,6 +1,6 @@
 package me.kevcar.scaffolding.presentation.model
 
-import me.kevcar.scaffolding.presentation.entities.ImagePage
+import me.kevcar.scaffolding.core.entity.ImagePage
 import redux.applyMiddleware
 import redux.observable.createEpicMiddleware
 import javax.inject.Inject

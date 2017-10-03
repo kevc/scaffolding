@@ -9,8 +9,14 @@ object Reducer : Reducer<AppModel.State> {
                 state.copy(pages = emptyList())
             }
             is AppModel.Action.AddPage -> {
-                val updatedPages = state.pages.plus(action.page)
-                state.copy(pages = updatedPages)
+                val oldLastPageOffset = state.pages.lastOrNull()?.nextPageOffset ?: 0
+                val newPage = action.page
+                val updatedNewPage = newPage.copy(
+                        nextPageOffset = oldLastPageOffset
+                                + newPage.requestedPageSize
+                                + newPage.nextPageOffset
+                )
+                state.copy(pages = state.pages.plus(updatedNewPage))
             }
             else -> state
         }

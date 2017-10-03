@@ -27,8 +27,8 @@ import me.kevcar.scaffolding.presentation.model.AppModel
 import me.kevcar.scaffolding.presentation.model.Selectors
 import me.kevcar.scaffolding.ui.ImageController
 import me.kevcar.scaffolding.ui.ImageItemView
+import me.kevcar.scaffolding.ui.InfiniteScrollListener
 import redux.asObservable
-
 
 class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
 
@@ -56,21 +56,30 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
     private val controller = ImageController(this)
     private val disposables = CompositeDisposable()
 
+    private val loadNextPage = {
+        appModel.dispatch(AppModel.Action.LoadNextPage())
+        Unit
+    }
+    private val listener = InfiniteScrollListener(loadNextPage, layoutManager, 16)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = controller.adapter
+        recyclerView.addOnScrollListener(listener)
 
         appModel.dispatch(AppModel.Action.ExecuteQuery(QUERY))
 
         val stateChanges = appModel.asObservable()
                 .map(Selectors.PAGES_TO_IMAGES)
+                .distinctUntilChanged()
                 .publish()
 
         stateChanges
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { listener.setLoading(false) }
                 .subscribe(Consumer { controller.setImages(it) }, onError)
                 .let { disposables.add(it) }
 
@@ -102,9 +111,7 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
         }
     }
 
-
     override fun onLongClick(image: Image) {
-
         val hasPermission = ContextCompat.checkSelfPermission(
                 this@MainActivity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
