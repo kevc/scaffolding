@@ -25,6 +25,7 @@ import me.kevcar.scaffolding.app.Application
 import me.kevcar.scaffolding.core.entity.Image
 import me.kevcar.scaffolding.presentation.model.AppModel
 import me.kevcar.scaffolding.presentation.model.Selectors
+import me.kevcar.scaffolding.ui.DividerDecoration
 import me.kevcar.scaffolding.ui.ImageController
 import me.kevcar.scaffolding.ui.ImageItemView
 import me.kevcar.scaffolding.ui.InfiniteScrollListener
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
         Application.getComponent(this).picasso()
     }
 
-    private val layoutManager = GridLayoutManager(this, 4)
+    private val layoutManager = GridLayoutManager(this, ROW_LENGTH)
     private val controller = ImageController(this)
     private val disposables = CompositeDisposable()
 
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = controller.adapter
         recyclerView.addOnScrollListener(listener)
+        recyclerView.addItemDecoration(DividerDecoration(this))
 
         appModel.dispatch(AppModel.Action.ExecuteQuery(QUERY))
 
@@ -155,6 +157,8 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
     }
 
     companion object {
+        private val ROW_LENGTH = 4
+
         private val QUERY = "animal"
 
         private val PERMISSION_REQUEST_CODE = 1234
