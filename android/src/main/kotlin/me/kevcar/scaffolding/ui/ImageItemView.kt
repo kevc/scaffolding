@@ -1,7 +1,6 @@
 package me.kevcar.scaffolding.ui
 
-import android.app.Application
-import android.content.Context
+import android.content.*
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
@@ -10,6 +9,9 @@ import android.widget.ImageView
 import com.airbnb.epoxy.EpoxyModel
 import me.kevcar.scaffolding.R
 import me.kevcar.scaffolding.core.entity.Image
+import android.provider.MediaStore
+import me.kevcar.scaffolding.app.Application
+
 
 class ImageItemView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, theme: Int = 0)
@@ -30,10 +32,16 @@ class ImageItemView @JvmOverloads constructor(
                 clickListener.onImageClicked(image)
             }
 
+            view.setOnLongClickListener {
+                clickListener.onLongClick(image)
+                true
+            }
+
             me.kevcar.scaffolding.app.Application.getComponent(view.context)
                     .picasso()
                     .load(image.thumbnailUrl)
                     .fit()
+                    .centerCrop()
                     .placeholder(ColorDrawable(Color.parseColor("#000000")))
                     .into(view)
         }
@@ -41,6 +49,8 @@ class ImageItemView @JvmOverloads constructor(
 
     interface ImageClickListener {
         fun onImageClicked(image: Image)
+
+        fun onLongClick(image: Image)
     }
 
 }

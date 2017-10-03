@@ -1,17 +1,20 @@
 package me.kevcar.scaffolding.presentation.model
 
-import me.kevcar.scaffolding.core.entity.Image
+import me.kevcar.scaffolding.core.entity.ImagePage
 import redux.applyMiddleware
 import redux.observable.createEpicMiddleware
 import javax.inject.Inject
 
 class AppModel @Inject constructor(epic: Epic) : redux.api.Store<AppModel.State> {
 
-    data class State(val images: List<Image> = emptyList())
+    data class State(
+            val pages: List<ImagePage> = emptyList()
+    )
 
     sealed class Action {
-        class ExecuteQuery(val query: String)
-        class SetImages(val images: List<Image>)
+        class ExecuteQuery(val query: String) : Action()
+        class AddPage(val page: ImagePage) : Action()
+        class LoadNextPage : Action()
     }
 
     // Redux Api Implementation

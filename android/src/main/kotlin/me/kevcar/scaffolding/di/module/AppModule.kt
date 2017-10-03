@@ -54,7 +54,7 @@ class AppModule(private val application: Application) {
     @AppScope
     fun provideClient(authKeyInterceptor: AuthKeyInterceptor): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
         return OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(authKeyInterceptor)
