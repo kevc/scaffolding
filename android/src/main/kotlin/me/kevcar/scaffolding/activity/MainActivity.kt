@@ -3,12 +3,10 @@ package me.kevcar.scaffolding.activity
 import android.Manifest
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -26,6 +24,7 @@ import me.kevcar.scaffolding.R
 import me.kevcar.scaffolding.app.Application
 import me.kevcar.scaffolding.core.entity.Image
 import me.kevcar.scaffolding.presentation.model.AppModel
+import me.kevcar.scaffolding.presentation.model.Selectors
 import me.kevcar.scaffolding.ui.ImageController
 import me.kevcar.scaffolding.ui.ImageItemView
 import redux.asObservable
@@ -64,10 +63,10 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = controller.adapter
 
-        appModel.dispatch(AppModel.Action.ExecuteQuery("animal"))
+        appModel.dispatch(AppModel.Action.ExecuteQuery(QUERY))
 
         val stateChanges = appModel.asObservable()
-                .map { it.images }
+                .map(Selectors.PAGES_TO_IMAGES)
                 .publish()
 
         stateChanges
@@ -149,6 +148,8 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
     }
 
     companion object {
+        private val QUERY = "animal"
+
         private val PERMISSION_REQUEST_CODE = 1234
     }
 }

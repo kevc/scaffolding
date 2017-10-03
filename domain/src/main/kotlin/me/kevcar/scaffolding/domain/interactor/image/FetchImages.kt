@@ -9,11 +9,15 @@ import javax.inject.Inject
 class FetchImages @Inject constructor(private val remote: RemoteImageDataSource) {
 
     fun execute(request: Request): Observable<Response> {
-        return remote.fetchImages(request.query, request.pageSize, request.offset)
+        return remote.fetchImages(request.query, PAGE_SIZE, request.offset)
                 .map { Response(0, it) }
     }
 
-    class Request(val query: String, val pageSize: Int, val offset: Int)
+    class Request(val query: String, val offset: Int = 0)
 
     class Response(val nextPageOffset: Int, val images: List<Image>)
+
+    companion object {
+        val PAGE_SIZE = 36
+    }
 }
