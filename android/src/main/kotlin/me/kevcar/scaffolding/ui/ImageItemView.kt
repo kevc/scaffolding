@@ -10,6 +10,7 @@ import com.airbnb.epoxy.EpoxyModel
 import me.kevcar.scaffolding.R
 import me.kevcar.scaffolding.core.entity.Image
 import android.provider.MediaStore
+import android.support.v4.content.ContextCompat
 import me.kevcar.scaffolding.app.Application
 
 
@@ -23,7 +24,10 @@ class ImageItemView @JvmOverloads constructor(
         super.onMeasure(widthMeasureSpec, newHeightSpec)
     }
 
-    class Model(private val image: Image, private val clickListener: ImageClickListener) : EpoxyModel<ImageItemView>() {
+    class Model(
+            private val context: Context,
+            private val image: Image,
+            private val clickListener: ImageClickListener) : EpoxyModel<ImageItemView>() {
         override fun getDefaultLayout() = R.layout.item_image
 
         override fun bind(view: ImageItemView) {
@@ -42,7 +46,11 @@ class ImageItemView @JvmOverloads constructor(
                     .load(image.thumbnailUrl)
                     .fit()
                     .centerCrop()
-                    .placeholder(ColorDrawable(Color.parseColor("#000000")))
+                    .placeholder(
+                            ColorDrawable(
+                                    ContextCompat.getColor(context, android.R.color.darker_gray)
+                            )
+                    )
                     .into(view)
         }
     }

@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
     }
 
     private val layoutManager = GridLayoutManager(this, ROW_LENGTH)
-    private val controller = ImageController(this)
+    private val controller = ImageController(this, this)
     private val disposables = CompositeDisposable()
 
     private val loadNextPage = {
@@ -139,7 +139,6 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
     }
 
     private fun putOnClipboard(image: Image) {
-        // Todo save image, provide local uri
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val data = ClipData.newUri(contentResolver, "Image", Uri.parse(image.contentUrl))
         clipboard.primaryClip = data

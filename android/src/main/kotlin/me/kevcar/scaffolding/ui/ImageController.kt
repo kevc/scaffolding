@@ -1,9 +1,11 @@
 package me.kevcar.scaffolding.ui
 
+import android.content.Context
 import com.airbnb.epoxy.EpoxyController
 import me.kevcar.scaffolding.core.entity.Image
 
 class ImageController(
+        private val context: Context,
         private val clickListener: ImageItemView.ImageClickListener) : EpoxyController() {
 
     private var images: List<Image> = emptyList()
@@ -16,7 +18,7 @@ class ImageController(
     override fun buildModels() {
         images.forEachIndexed { index, image ->
             ImageItemView
-                    .Model(image, clickListener)
+                    .Model(context, image, clickListener)
                     .id(index)
                     .let { add(it) }
         }
