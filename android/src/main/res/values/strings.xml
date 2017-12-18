@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Code Sample</string>
+    <string name="app_name">Image Pagination</string>
     <string name="clipboard_success">Added to clipboard.</string>
     <string name="clipboard_permission_prompt">Please long click item again.</string>
 
