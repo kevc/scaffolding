@@ -1,4 +1,4 @@
-package me.kevcar.scaffolding.api.interceptor
+package me.kevcar.scaffolding.data.api.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response

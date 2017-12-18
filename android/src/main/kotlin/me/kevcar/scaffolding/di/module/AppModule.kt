@@ -7,8 +7,8 @@ import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import me.kevcar.scaffolding.BuildConfig
-import me.kevcar.scaffolding.api.datasource.RetrofitImageDataSource
-import me.kevcar.scaffolding.api.interceptor.AuthKeyInterceptor
+import me.kevcar.scaffolding.data.api.datasource.RetrofitImageDataSource
+import me.kevcar.scaffolding.data.api.interceptor.AuthKeyInterceptor
 import me.kevcar.scaffolding.app.Application
 import me.kevcar.scaffolding.core.di.AppScope
 import me.kevcar.scaffolding.domain.datasource.RemoteImageDataSource
