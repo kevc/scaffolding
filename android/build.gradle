@@ -25,7 +25,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField 'String', 'API_KEY', "\"5db7a77b19d943f2a4cce83ce6b59502\""
+        buildConfigField 'String', 'API_KEY', "\"zu3uxp65cq9jqt55krfx7pkv\""
     }
 
     configurations.all {
@@ -65,23 +65,24 @@ dependencies {
     compile appCompatV7
     compile recyclerView
     compile dagger
+    compile epoxy
     compile gson
     compile kotlinStdLib
+    compile loggingInterceptor
+    compile picasso
+    compile reduxObservable
+    compile reduxRxJava
     compile retrofit
     compile retrofitGsonConverter
+    compile retrofitRxJava
+    compile rxAndroid
     compile rxJava
     compile reduxObservable
-
-    // Ran out of time, so this is a bit messy.
-    compile 'com.airbnb.android:epoxy:2.5.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.github.pardom.redux-rxjava:redux-rxjava2:1.2.3'
-    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 
     ////////////////////////////////////////////////////////////////
     // Test Dependencies
 
     testCompile jUnit
+
+    compile project(path: ':data')
 }

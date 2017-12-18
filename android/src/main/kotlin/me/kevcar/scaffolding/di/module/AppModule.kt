@@ -9,10 +9,10 @@ import dagger.Provides
 import me.kevcar.scaffolding.BuildConfig
 import me.kevcar.scaffolding.api.datasource.RetrofitImageDataSource
 import me.kevcar.scaffolding.api.interceptor.AuthKeyInterceptor
-import me.kevcar.scaffolding.api.service.ImageService
 import me.kevcar.scaffolding.app.Application
 import me.kevcar.scaffolding.core.di.AppScope
 import me.kevcar.scaffolding.domain.datasource.RemoteImageDataSource
+import me.kevcar.scaffolding.data.api.service.ImageService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -74,7 +74,7 @@ class AppModule(private val application: Application) {
     @AppScope
     fun provideRetrofit(client: OkHttpClient, executor: Executor): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("https://api.cognitive.microsoft.com/bing/v5.0/images/")
+                .baseUrl("https://api.gettyimages.com/v3/")
                 .client(client)
                 .callbackExecutor(executor)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -97,7 +97,9 @@ class AppModule(private val application: Application) {
     @Provides
     @AppScope
     fun providePicasso(context: Context): Picasso {
-        return Picasso.with(context)
+        val picasso =  Picasso.with(context)
+        picasso.isLoggingEnabled = true
+        return picasso
     }
 
 }

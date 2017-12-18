@@ -33,9 +33,9 @@ class Epic @Inject constructor(private val fetchImages: FetchImages) : Epic<AppM
                 .flatMap { action ->
                     val lastPage = store.state.pages.last()
                     val searchTerm = lastPage.searchTerm
-                    val pageOffset = lastPage.nextPageOffset
+                    val nextPage = lastPage.nextPage
 
-                    fetchImages.execute(FetchImages.Request(searchTerm, pageOffset))
+                    fetchImages.execute(FetchImages.Request(searchTerm, nextPage))
                             .map { AppModel.Action.AddPage(it.imagePage) }
                             .subscribeOn(Schedulers.io())
                 }

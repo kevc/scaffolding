@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
 
     private fun putOnClipboard(image: Image) {
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val data = ClipData.newUri(contentResolver, "Image", Uri.parse(image.contentUrl))
+        val data = ClipData.newUri(contentResolver, "Image", Uri.parse(image.uri))
         clipboard.primaryClip = data
         Toast
                 .makeText(this@MainActivity, R.string.clipboard_success, Toast.LENGTH_SHORT)
@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
     override fun onImageClicked(image: Image) {
         loadingView.visibility = View.VISIBLE
 
-        picasso.load(image.contentUrl)
+        picasso.load(image.uri)
                 .into(galleryTarget)
 
         imageGallery.visibility = View.VISIBLE
@@ -186,7 +186,7 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
     companion object {
         private val ROW_LENGTH = 4
 
-        private val QUERY = "animal"
+        private val QUERY = "volcano"
 
         private val PERMISSION_REQUEST_CODE = 1234
     }

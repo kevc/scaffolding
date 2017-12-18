@@ -43,7 +43,7 @@ class ImageItemView @JvmOverloads constructor(
 
             me.kevcar.scaffolding.app.Application.getComponent(view.context)
                     .picasso()
-                    .load(image.thumbnailUrl)
+                    .load(image.uri)
                     .fit()
                     .centerCrop()
                     .placeholder(

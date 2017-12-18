@@ -7,6 +7,6 @@ import me.kevcar.scaffolding.core.entity.ImagePage
 
 interface RemoteImageDataSource {
 
-    fun fetchImages(query: String, pageSize: Int, offset: Int): Observable<ImagePage>
+    fun fetchImages(query: String, pageSize: Int, pageNumber: Int): Observable<ImagePage>
 
 }
