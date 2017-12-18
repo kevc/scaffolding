@@ -22,26 +22,26 @@ class ReducerTest {
     fun testFirstPageOffset() {
 
         val initialState = AppModel.State().copy(emptyList())
-        val newPage = ImagePage("foo", PAGE_SIZE, emptyList(), OFFSET)
+        val newPage = ImagePage("foo", PAGE_SIZE, emptyList(), INITIAL_PAGE)
         val action = AppModel.Action.AddPage(newPage)
         val updatedState = Reducer.reduce(initialState, action)
 
-        assertEquals(updatedState.pages.first().nextPageOffset, PAGE_SIZE + OFFSET)
+        assertEquals(updatedState.pages.first().nextPage, 2)
     }
 
     @Test
     fun testNextPageOffset() {
-        val firstPage  = ImagePage("foo", PAGE_SIZE, emptyList(), 0)
+        val firstPage  = ImagePage("foo", PAGE_SIZE, emptyList(), 1)
         val initialState = AppModel.State().copy(listOf(firstPage))
-        val newPage = ImagePage("foo", PAGE_SIZE, emptyList(), OFFSET)
+        val newPage = ImagePage("foo", PAGE_SIZE, emptyList(), 2)
         val action = AppModel.Action.AddPage(newPage)
         val updatedState = Reducer.reduce(initialState, action)
 
-        assertEquals(updatedState.pages.last().nextPageOffset, PAGE_SIZE + OFFSET)
+        assertEquals(updatedState.pages.last().nextPage, 3)
     }
 
     companion object {
-        val PAGE_SIZE = 35
-        val OFFSET = 2
+        val PAGE_SIZE = 16
+        val INITIAL_PAGE = 1
     }
 }
