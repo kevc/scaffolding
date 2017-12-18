@@ -97,9 +97,7 @@ class AppModule(private val application: Application) {
     @Provides
     @AppScope
     fun providePicasso(context: Context): Picasso {
-        val picasso =  Picasso.with(context)
-        picasso.isLoggingEnabled = true
-        return picasso
+        return Picasso.with(context)
     }
 
 }

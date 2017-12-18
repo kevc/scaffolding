@@ -12,9 +12,8 @@ class AppModel @Inject constructor(epic: Epic) : redux.api.Store<AppModel.State>
     )
 
     sealed class Action {
-        class ExecuteQuery(val query: String) : Action()
+        class LoadNextPage(val query: String) : Action()
         class AddPage(val page: ImagePage) : Action()
-        class LoadNextPage : Action()
     }
 
     // Redux Api Implementation

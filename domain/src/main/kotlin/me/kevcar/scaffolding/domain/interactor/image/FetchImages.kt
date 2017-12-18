@@ -19,6 +19,6 @@ class FetchImages @Inject constructor(private val remote: RemoteImageDataSource)
     class Response(val imagePage: ImagePage)
 
     companion object {
-        val PAGE_SIZE = 16
+        val PAGE_SIZE = 36
     }
 }

@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
     private val disposables = CompositeDisposable()
 
     private val loadNextPage = {
-        appModel.dispatch(AppModel.Action.LoadNextPage())
+        appModel.dispatch(AppModel.Action.LoadNextPage(QUERY))
         Unit
     }
     private val listener = InfiniteScrollListener(loadNextPage, layoutManager, 16)
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity(), ImageItemView.ImageClickListener {
         recyclerView.addOnScrollListener(listener)
         recyclerView.addItemDecoration(DividerDecoration(this))
 
-        appModel.dispatch(AppModel.Action.ExecuteQuery(QUERY))
+        appModel.dispatch(AppModel.Action.LoadNextPage(QUERY))
 
         val stateChanges = appModel.asObservable()
                 .map(Selectors.PAGES_TO_IMAGES)
