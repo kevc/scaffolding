@@ -7,9 +7,9 @@ import me.kevcar.scaffolding.domain.datasource.RemoteImageDataSource
 
 class RetrofitImageDataSource(private val service: ImageService) : RemoteImageDataSource {
     override fun fetchImages(query: String, pageSize: Int, pageNumber: Int): Observable<ImagePage> {
-        return service.search(query, pageSize, pageNumber)
+        return service.search()
                 .map {
-                    ImagePage(query, pageSize, it.images.map { it.toCore() }, pageNumber)
+                    throw NotImplementedError()
                 }
     }
 }

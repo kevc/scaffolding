@@ -5,12 +5,10 @@ import me.kevcar.scaffolding.data.api.response.ImageResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+// Retrofit: http://square.github.io/retrofit/
+
 interface ImageService {
 
     @GET("search/images")
-    fun search(
-            @Query("phrase") query: String,
-            @Query("page_size") pageSize: Int,
-            @Query("page") offset: Int,
-            @Query("exclude_nudity") excludeNudity: Boolean = true) : Observable<ImageResponse>
+    fun search(/* TODO */) : Observable<ImageResponse>
 }

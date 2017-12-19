@@ -14,7 +14,6 @@ data class Image(
             val uri: String)
 
     fun toCore(): CoreImage {
-        val detail = meta.first()
-        return CoreImage(id, title, detail.uri, detail.isWaterMarked)
+        throw NotImplementedError()
     }
 }
