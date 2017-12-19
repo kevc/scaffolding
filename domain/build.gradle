@@ -8,8 +8,18 @@ dependencies {
     compile project(path: ':core')
 
     // Libs
+    compile kotlinStdLib
     compile rxJava
 }
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+buildscript {
+    ext.kotlin_version = '1.1.51'
+    repositories {
+        mavenCentral()
+    }
+}
+repositories {
+    mavenCentral()
+}
