@@ -25,3 +25,7 @@ API model classes, implementations of domain datasources, Retrofit `Service` int
 `android`
 
 The Android specific UI bindings. Think `Activity`, `View`, etc.
+
+## API
+
+For now, this app uses the Getty Images API
