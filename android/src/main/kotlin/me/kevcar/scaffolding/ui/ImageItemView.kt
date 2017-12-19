@@ -26,21 +26,10 @@ class ImageItemView @JvmOverloads constructor(
 
     class Model(
             private val context: Context,
-            private val image: Image,
-            private val clickListener: ImageClickListener) : EpoxyModel<ImageItemView>() {
+            private val image: Image) : EpoxyModel<ImageItemView>() {
         override fun getDefaultLayout() = R.layout.item_image
 
         override fun bind(view: ImageItemView) {
-
-            view.setOnClickListener {
-                clickListener.onImageClicked(image)
-            }
-
-            view.setOnLongClickListener {
-                clickListener.onLongClick(image)
-                true
-            }
-
             me.kevcar.scaffolding.app.Application.getComponent(view.context)
                     .picasso()
                     .load(image.uri)
@@ -53,12 +42,6 @@ class ImageItemView @JvmOverloads constructor(
                     )
                     .into(view)
         }
-    }
-
-    interface ImageClickListener {
-        fun onImageClicked(image: Image)
-
-        fun onLongClick(image: Image)
     }
 
 }
