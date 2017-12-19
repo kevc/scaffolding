@@ -28,4 +28,4 @@ The Android specific UI bindings. Think `Activity`, `View`, etc.
 
 ## API
 
-For now, this app uses the Getty Images API
+For now, this app uses the Getty Images API: http://developers.gettyimages.com/api/docs/v3/search/images/get/
