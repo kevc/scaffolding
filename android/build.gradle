@@ -67,7 +67,6 @@ dependencies {
     compile dagger
     compile epoxy
     compile gson
-    compile kotlinStdLib
     compile loggingInterceptor
     compile picasso
     compile reduxObservable
